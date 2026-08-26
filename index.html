@@ -9,31 +9,30 @@
 <body>
 
     <!-- WebGL Fallback -->
-    <div id="webgl-fallback" role="alert">
+    <div id="webgl-fallback" role="alert" aria-hidden="true">
         <h2>THRESHOLD</h2>
         <p>This experience requires WebGL.<br>Please try a modern browser or enable WebGL.</p>
-        <p><a href="#" onclick="location.reload()">Retry</a></p>
+        <button id="retry-webgl">Retry</button>
     </div>
 
-    <!-- Minimal Fallback UI (accessibility) -->
+    <!-- Minimal fallback UI (accessibility, visually unobtrusive) -->
     <div id="fallback-ui" role="navigation" aria-label="Navigation">
-        <button id="btn-return" aria-label="Return to Core">↺ Core</button>
+        <button id="btn-return" aria-label="Return to Core">↺</button>
         <span class="separator" aria-hidden="true">·</span>
         <button id="btn-contact" aria-label="Contact">✉</button>
-        <span class="hint" aria-hidden="true">ESC · click core to return</span>
+        <span class="hint" aria-hidden="true">ESC · tap core</span>
     </div>
 
-    <!-- Contact Pill -->
+    <!-- Contact pill (subtle) -->
     <div id="contact-pill" role="button" tabindex="0" aria-label="Contact information">
         <span class="dot" aria-hidden="true"></span>
         <span>justprayag2008@gmail.com</span>
         <span class="email" aria-hidden="true">· sirf.safar</span>
     </div>
 
-    <!-- Three.js renders here -->
+    <!-- Three.js canvas container -->
     <div id="canvas-container"></div>
 
-    <!-- Import Map for Three.js -->
     <script type="importmap">
         {
             "imports": {
@@ -43,7 +42,6 @@
         }
     </script>
 
-    <!-- Main entry point -->
     <script type="module" src="main.js"></script>
 
 </body>
