@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>THRESHOLD — Vertical Slice</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- WebGL Fallback -->
+    <div id="webgl-fallback" role="alert">
+        <h2>THRESHOLD</h2>
+        <p>This experience requires WebGL.<br>Please try a modern browser or enable WebGL.</p>
+        <p><a href="#" onclick="location.reload()">Retry</a></p>
+    </div>
+
+    <!-- Minimal Fallback UI (accessibility) -->
+    <div id="fallback-ui" role="navigation" aria-label="Navigation">
+        <button id="btn-return" aria-label="Return to Core">↺ Core</button>
+        <span class="separator" aria-hidden="true">·</span>
+        <button id="btn-contact" aria-label="Contact">✉</button>
+        <span class="hint" aria-hidden="true">ESC · click core to return</span>
+    </div>
+
+    <!-- Contact Pill -->
+    <div id="contact-pill" role="button" tabindex="0" aria-label="Contact information">
+        <span class="dot" aria-hidden="true"></span>
+        <span>justprayag2008@gmail.com</span>
+        <span class="email" aria-hidden="true">· sirf.safar</span>
+    </div>
+
+    <!-- Three.js renders here -->
+    <div id="canvas-container"></div>
+
+    <!-- Import Map for Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <!-- Main entry point -->
+    <script type="module" src="main.js"></script>
+
+</body>
+</html>
