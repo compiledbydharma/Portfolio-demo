@@ -15,22 +15,19 @@ export function initAccessibility({ onReturn, onContact }) {
         });
     }
 
-    // Show fallback UI after 8 seconds
+    // Show fallback UI after 8 seconds (only if no interaction)
     const fallbackUI = document.getElementById('fallback-ui');
     let timer = setTimeout(() => {
         fallbackUI.classList.add('visible');
     }, 8000);
 
-    // Hide on interaction
     const hide = () => {
         fallbackUI.classList.remove('visible');
         clearTimeout(timer);
+        document.removeEventListener('click', hide);
+        document.removeEventListener('touchstart', hide);
     };
 
-    // We'll attach these to global events from main
-    window.__hideFallbackUI = hide;
-
-    // Listen for user interaction to hide
     document.addEventListener('click', hide);
     document.addEventListener('touchstart', hide);
 }
@@ -42,4 +39,3 @@ export function showFallbackUI() {
 export function hideFallbackUI() {
     document.getElementById('fallback-ui').classList.remove('visible');
 }
-
