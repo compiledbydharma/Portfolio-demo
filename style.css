@@ -1,0 +1,252 @@
+/* ── Reset & Base ────────────────────────────────────────────── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #0a0a0a;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #e8e6e0;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ── Canvas container ──────────────────────────────────────────── */
+#canvas-container {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+    z-index: 1;
+}
+
+#canvas-container canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* ── WebGL fallback (hidden by default) ──────────────────────── */
+#webgl-fallback {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: #0a0a0a;
+    color: #e8e6e0;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+    padding: 40px 24px;
+    font-family: 'Inter', sans-serif;
+}
+
+#webgl-fallback.visible {
+    display: flex;
+}
+
+#webgl-fallback h2 {
+    font-weight: 300;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: #c8c6c0;
+}
+
+#webgl-fallback p {
+    font-size: 14px;
+    color: rgba(255, 255, 240, 0.5);
+    max-width: 400px;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+#webgl-fallback button {
+    background: rgba(255, 255, 240, 0.08);
+    border: 1px solid rgba(255, 255, 240, 0.15);
+    border-radius: 6px;
+    padding: 8px 24px;
+    color: #e8e6e0;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: inherit;
+}
+
+#webgl-fallback button:hover {
+    background: rgba(255, 255, 240, 0.15);
+}
+
+/* ── Accessibility fallback UI (visually unobtrusive) ────────── */
+#fallback-ui {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,240,0.06);
+}
+
+#fallback-ui.visible {
+    opacity: 0.4;
+    pointer-events: auto;
+}
+
+#fallback-ui:hover {
+    opacity: 0.8;
+}
+
+#fallback-ui button {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 240, 0.5);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 4px 6px;
+    font-family: inherit;
+    transition: color 0.2s;
+    min-height: 30px;
+    min-width: 30px;
+}
+
+#fallback-ui button:hover {
+    color: rgba(255, 255, 240, 0.8);
+}
+
+#fallback-ui .separator {
+    color: rgba(255, 255, 240, 0.15);
+    font-size: 10px;
+}
+
+#fallback-ui .hint {
+    color: rgba(255, 255, 240, 0.2);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+}
+
+/* ── Contact pill (subtle) ────────────────────────────────────── */
+#contact-pill {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(12, 12, 14, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 240, 0.06);
+    border-radius: 30px;
+    padding: 4px 12px 4px 10px;
+    font-size: 11px;
+    color: rgba(255, 255, 240, 0.35);
+    letter-spacing: 0.2px;
+    font-weight: 300;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s, opacity 0.3s;
+    opacity: 0.5;
+}
+
+#contact-pill:hover {
+    background: rgba(20, 20, 24, 0.7);
+    border-color: rgba(255, 255, 240, 0.12);
+    opacity: 1;
+}
+
+#contact-pill .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #5a7a6a;
+    flex-shrink: 0;
+}
+
+#contact-pill .email {
+    display: none;
+}
+
+#contact-pill:hover .email {
+    display: inline;
+}
+
+/* ── Reduced motion ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 640px) {
+    #contact-pill {
+        bottom: 16px;
+        right: 16px;
+        padding: 3px 10px 3px 8px;
+        font-size: 10px;
+    }
+    #contact-pill .email {
+        display: none !important;
+    }
+    #fallback-ui {
+        bottom: 16px;
+        padding: 3px 10px;
+        gap: 4px;
+    }
+    #fallback-ui button {
+        font-size: 11px;
+        padding: 3px 4px;
+        min-height: 28px;
+        min-width: 28px;
+    }
+    #fallback-ui .hint {
+        display: none;
+    }
+    #fallback-ui .separator {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    #contact-pill {
+        bottom: 12px;
+        right: 12px;
+        font-size: 9px;
+        padding: 2px 8px 2px 6px;
+    }
+    #contact-pill .dot {
+        width: 4px;
+        height: 4px;
+    }
+}
+
+/* ── Focus indicators ────────────────────────────────────────── */
+button:focus-visible {
+    outline: 2px solid rgba(255, 255, 240, 0.4);
+    outline-offset: 2px;
+}
